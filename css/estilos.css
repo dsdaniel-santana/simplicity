@@ -1,0 +1,435 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Raleway:wght@400;700;800&display=swap');
+
+* { box-sizing: border-box; }
+
+/* Declarando o font-size para o 
+elemento raíz (html).
+
+IMPORTANTE! Esta configuração
+permitirá o uso da medida REM 
+em vários lugares no CSS. 
+
+Exemplo: 1rem equivale (no momento) a 14px */
+html { font-size: 14px; }
+
+body { 
+    background-color: #fffffa; 
+    font-family: 'Noto Sans', Verdana, Geneva, Tahoma, sans-serif;
+    
+    /* Solução rodapé (parte 1) */
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+/* Solução do rodapé (parte 2) */
+main {flex: 1;}
+
+
+
+/* CSS Reset
+Técnica de "limpeza" de formatações pré-existentes
+nos navegadores. Neste exemplo abaixo, estamos
+resetando apenas alguns elementos do site. */
+body, h1, h2, p, figure, .menu {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-family: Raleway, sans-serif;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+h1 a {
+    background-color: #0d0000;
+    color: #fffffa;
+    border-radius: 5px;
+    padding: 0.3rem 1rem;
+}
+
+a { text-decoration: none; }
+
+header {
+    /* Deixar o cabeçalho
+    fixo no topo da página */
+    position: sticky;
+    top: 0;
+    background-color: #fffffa;
+}
+
+/* Ativando flex somente para
+o limitador que está dentro do header */
+header .limitador {
+    height: 12vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav h2 a {
+    color: #0d0000;
+    font-size: 1.2rem;
+    padding: 1rem;
+    display: inline-block;
+}
+
+nav h2 a:hover, nav h2 a:focus,  
+.menu a:hover, .menu a:focus     {
+    background-color: #bbbbbb;
+}
+
+.menu {  /* lista de links */
+    list-style: none; 
+
+    /* Esta propriedade
+    será usada posteriormente
+    para esconder a lista de links */
+    display: none;
+}
+
+.menu a {
+    color: #0d0000;
+    font-weight: bold;
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ATENÇÃO!
+Esta regra abaixo somente irá
+funcionar com o auxílio de programação
+JS.
+
+Objetivo: quando duas classes estiverem
+combinadas ("menu" e "aberto"), o menu
+será exibido completamente. */
+.menu.aberto {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    
+    position: absolute;
+    right: 0;
+    left: 0;
+}
+
+.destaque {
+    background-image: url(../imagens/fundo-destaque.jpg);
+
+    height: 88vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.destaque h2, .destaque p {
+    color: white;
+    text-align: center;
+}
+
+.destaque h2 {
+    /* Fonte responsiva usando
+    função: clamp(
+        tamanho mínimo, 
+        tamanho ideal, 
+        tamanho máximo) */
+    font-size: clamp(3rem, 10vw, 7rem);
+
+    font-weight: 800;
+
+    /* Etapa 2: "chamar"
+    e configurar a execução
+    da animação. */
+    animation-name: aparecer;
+    animation-duration: 3s;
+
+    /* animation-iteration-count: infinite;
+    animation-direction: alternate; */
+}
+
+.destaque p {
+    font-size: clamp(1.5rem, 3vw, 3rem);
+
+    animation-name: aparecer;
+    animation-duration: 3s;
+    animation-delay: 2s;
+
+    /* Usamos a propriedade/valor
+    abaixo para forçar a animação
+    a iniciar (após os 2s) já
+    com a opacidade zerada, o
+    tamanho menor e posição
+    diferente. */
+    animation-fill-mode: backwards;
+}
+
+
+
+/* Etapa 1
+Criar uma regra de
+animação */
+@keyframes aparecer {
+    /* Dê (como inicia) */
+    from { 
+        opacity: 0;
+        transform: 
+            scale(0.1) 
+            translateY(-600px);
+    }
+
+    /* Para (como termina) */
+    to { 
+        opacity: 1;
+        transform: 
+            scale(1) 
+            translateY(0);
+    }
+}
+
+/* Tornando as imagens responsivas/flexíveis */
+img { max-width: 100%; }
+
+article h2 {
+    padding: 1rem;
+    font-size: 2rem;
+    font-family: "Raleway", sans-serif;
+    color: #6b6b6b;
+}
+
+article p,
+article address {
+    padding: 0.5rem 0;
+    font-size: 1.3rem;
+}
+
+article address {
+    font-style: normal;
+}
+
+/* Alinhamento dos articles
+SOMENTE que tenham as classes
+indicadas */
+.front-end,
+.historia,
+.localizacao {
+    text-align: center;
+}
+
+.historia {
+    background-image: url(../imagens/fundo-madeira.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.historia h2 {
+    color: white;
+    text-shadow: black 1px 1px 3px;
+} 
+
+.historia iframe {
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 2rem;
+}
+
+.localizacao iframe {
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.front-end figure {
+    margin: 2rem auto;
+}
+
+.limitador {
+    width: 95vw;
+    margin: auto;
+}
+
+footer {
+    background-color: #0d0000;
+    color: white;
+    height: 30vh;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+
+}
+
+/* Regras para páginas internas (Produtos, Serviços e Contato) */
+.conteudo{
+    background-color: #fbfbfb;
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.conteudo h2{
+    padding-left: 0;
+    text-align: center;
+}
+
+.conteudo h2::before {content: "👉";}
+.conteudo h2::after {content: "📌";}
+
+.conteudo p::first-letter{
+    /* font-weight: bold; */
+    /* font-size: 1.2rem; */
+}
+
+
+table, th, td {
+    border: solid 2px black;
+
+    /* Remove espaçamento entre as bordas */
+    border-collapse: collapse;
+}
+
+table {
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+}
+
+caption {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding-bottom: 0.5rem;
+}
+
+th {
+    width: 33%;
+    background-color: #0d0000;
+    color: #fffffa;
+    padding: 0.7rem;
+    font-size: 1.1rem;
+}
+
+td {
+
+    padding: 2%;
+    font-size: 1.1rem;
+
+}
+/* last-child-> ultimo TD */
+td:last-child {text-align: right;}
+
+/* first-child-> primeiro TD */
+td:first-child {text-transform: uppercase;}
+
+/* nth-child(valor) */
+td:nth-child(2) {text-align: center;}
+
+/* Pseudo-elementos
+Obs.: sempre inciam com duplo :: dois pontos */
+td:last-child::before{content: "R$";}
+
+/* odd impar */
+tr:nth-child(odd) {background-color: lightgrey;}
+
+/* even par */
+tr:nth-child(even) {background-color: lightblue;}
+
+.format img {
+        filter: grayscale(100%);
+        border-radius: 50%;
+        box-shadow: black 0 0 50px;
+        transform: scale(0.9);
+        transition: 0.2s;
+}
+
+.format img:hover{
+    transform: scale(1);
+    filter: grayscale(0);
+
+}
+
+form {
+    width: 95%;
+    margin: auto;
+    padding: 1rem;
+    background-color: lightgrey;
+    border-radius: 8px;
+}
+
+
+/* Pseudo-classe :not() 
+Permite criar execeções para determinadas regras.
+No exemplo abaixo, estamos selecionando todos os inputs EXCETO os que são do tipo radio e checkbox */
+input:not([type=radio]):not([type=checkbox]), select, textarea {
+    border: none;
+    padding: 1%;
+    width: 100%;
+    box-shadow: grey 0 0 10px;
+    height: 40px;
+}
+
+textarea {height: auto;}
+
+label {font-size: 1.3rem;}
+
+form div {margin-top: 1rem;}
+
+button {
+        border: none;
+        background-color: black;
+        color: white;
+        padding: 1rem;
+        fontfont-weight: bold;
+}
+
+button:hover, button:focus {
+    background-color: rgb(84, 84, 84);
+    cursor: pointer;
+}
+
+
+
+@media screen and (min-width: 530px){
+    nav h2 {display: none;}
+    .menu {display: flex;}
+    .menu li{width: 100%;}
+    nav {width: 70%;}
+    .front-end figure img {height: 150px;}
+}
+/*
+Para telas a partir de 500px, faça::after
+-esconder a palavra "Menu"
+-habilitar o flex para a classe menu (lista)
+-definir largura 70% para o elemento nav
+- ldefinir largura 100% para os itens dentro daista menu
+-reduzir a altura imagens contidas no front-end para 150px
+*/
+
+
+
+@media screen and (min-width: 800px){
+    html {font-size: 18px;}
+    .limitador {max-width: 1100px;}
+}
+
+
+
+
+
+
+/* Para telas 800px de largura, faça: 
+
+-aumentar o tamanho geral dos textos (referência agora devera ser 18px)
+
+-Definir a largura máxima para da classe limitador para 1100px
+
+*/
