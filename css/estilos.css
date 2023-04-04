@@ -10,7 +10,7 @@ permitirá o uso da medida REM
 em vários lugares no CSS. 
 
 Exemplo: 1rem equivale (no momento) a 14px */
-html { font-size: 14px; }
+html { font-size: 16px; }
 
 body { 
     background-color: #fffffa; 
